@@ -1,0 +1,19 @@
+.image-gradient {
+    position: relative;
+    width: 100%;
+    height: 990px;
+    background-image: linear-gradient(to left,  #081020, rgba(0,0,0,0.5)), url('/img/mestre.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+@media screen and (max-width: 768px){
+    .image-gradient{
+        width: 100%;
+        height: 300px;
+        background-image: linear-gradient(to top,  #081020, rgba(0,0,0,0.5)), url('/img/mestre.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
