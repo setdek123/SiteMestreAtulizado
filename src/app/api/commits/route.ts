@@ -5,7 +5,7 @@ import { prisma } from "../../../lib/prisma";
 // GET público: retorna todos os commits
 export async function GET() {
   try {
-    const commits = await prisma.Commit.findMany({
+    const commits = await prisma.commit.findMany({
       orderBy: { createdAt: "desc" }, // mais recente primeiro
     });
 
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const commit = await prisma.Commit.create({
+    const commit = await prisma.commit.create({
       data: { message },
     });
 
