@@ -1,46 +1,74 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../lib/prisma";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import { prisma } from "../../../../lib/prisma";
+
+const JWT_SECRET = process.env.SECRET_TOKEN!;
 
 export async function POST(req: Request) {
   try {
     const { email, passw } = await req.json();
 
     if (!email || !passw) {
-      return NextResponse.json({ msg: "Todos os campos são obrigatórios!" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Email e senha são obrigatórios" },
+        { status: 400 }
+      );
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: { email }
+    });
+
     if (!user) {
-      return NextResponse.json({ msg: "Usuário não encontrado" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Email ou senha inválidos" },
+        { status: 401 }
+      );
     }
 
-    const isValid = await bcrypt.compare(passw, user.passw);
-    if (!isValid) {
-      return NextResponse.json({ msg: "Senha inválida" }, { status: 401 });
+    //  Compara senha criptografada
+    const passwordValid = await bcrypt.compare(passw, user.passw);
+
+    if (!passwordValid) {
+      return NextResponse.json(
+        { error: "Email ou senha inválidos" },
+        { status: 401 }
+      );
     }
 
+    //  Gera JWT
     const token = jwt.sign(
       { id: user.id, email: user.email },
-      process.env.SECRET_TOKEN || "secret",
+      JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    const response = NextResponse.json({ msg: "Login realizado com sucesso!" }, { status: 200 });
-    response.cookies.set({
-      name: "token",
-      value: token,
+    const response = NextResponse.json({
+      success: true,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email
+      }
+    });
+
+    //  Cookie seguro para o middleware
+    response.cookies.set("token", token, {
       httpOnly: true,
-      path: "/",
-      maxAge: 7 * 24 * 60 * 60, // 7 dias
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7
     });
 
     return response;
 
-  } catch (err) {
-    console.error("Erro no login:", err);
-    return NextResponse.json({ msg: "Erro interno no login" }, { status: 500 });
+  } catch (error) {
+    console.error("Erro no login:", error);
+    return NextResponse.json(
+      { error: "Erro interno do servidor" },
+      { status: 500 }
+    );
   }
 }
