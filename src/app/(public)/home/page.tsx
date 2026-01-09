@@ -8,6 +8,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 // Pages
+
 import About from "../about/page";
 import Grounp from "../grounp/page";
 import Footer from "../footer/page";
