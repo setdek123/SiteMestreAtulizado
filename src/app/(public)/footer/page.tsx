@@ -65,11 +65,11 @@ const Footer = () => {
 
   return (
     <div className="flex min-h-screen flex-col p-10 items-center bg-[#081020]">
-      <h1 className="text-3xl md:text-7xl font-extrabold text-green-500 text-center mb-10">
+      <h1 className="text-3xl md:text-7xl font-extrabold text-green-500 text-center mb-10 md:mt-25">
         Deixe sua opinião sobre nosso site!
       </h1>
 
-      <form onSubmit={commitUsers} className="flex gap-5 flex-wrap justify-center mb-10">
+      <form onSubmit={commitUsers} className="flex gap-5 flex-wrap justify-center mb-10 md:mt-15">
         <input
           type="text"
           className="bg-amber-50 p-3 px-5 w-80 rounded-md md:w-[600px]"
@@ -79,7 +79,7 @@ const Footer = () => {
         />
         <button
           type="submit"
-          className="bg-green-500 text-white font-bold px-6 rounded-md hover:bg-green-600 transition"
+          className="bg-green-500 text-white font-bold px-6 md:text-xl text-xl p-2 rounded-md hover:bg-green-600 transition"
         >
           Enviar
         </button>
@@ -87,7 +87,7 @@ const Footer = () => {
 
       {errorMsg && <p className="text-red-400 text-xl mb-10">{errorMsg}</p>}
 
-      <ul className="flex flex-col gap-6 w-full max-w-3xl">
+      <ul className="flex flex-col gap-6 w-full max-w-3xl md:mt-10">
         {ItemsUsers.map((item) => (
           <li
             key={item.id}
@@ -108,7 +108,7 @@ const Footer = () => {
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5"
       >
-        <FaWhatsapp size={70} className="text-green-500 hover:scale-110 transition" />
+        <FaWhatsapp size={70} className="text-green-500 hover:scale-110 transition z-99" />
       </a>
     </div>
   );

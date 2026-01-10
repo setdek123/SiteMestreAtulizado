@@ -26,24 +26,24 @@ export default function middleware(request: NextRequest) {
 
   const token = request.cookies.get("token")?.value;
 
-  // 🔑 Match de rota pública correto
+  
   const publicRoute = publicRoutes.find(
     (r) => pathname === r.path || pathname.startsWith(r.path + "/")
   );
 
-  // 🔓 Não logado em rota pública
+  
   if (!token && publicRoute) {
     return NextResponse.next();
   }
 
-  // 🔒 Não logado em rota privada
+  // Não logado em rota privada
   if (!token && !publicRoute) {
     return NextResponse.redirect(
       new URL(REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE, request.url)
     );
   }
 
-  // 🔐 Usuário logado
+  // Usuário logado
   if (token) {
     try {
       jwt.verify(token, JWT_SECRET);

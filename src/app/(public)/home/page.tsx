@@ -59,7 +59,7 @@ export default function Main() {
         />
 
         {/* CONTENT */}
-        <div className="relative z-10 flex flex-col items-start gap-6 px-6 sm:px-10 md:px-20 lg:px-40 py-32">
+        <div className="relative z-10 flex flex-col items-start gap-6 px-6 sm:px-10 md:px-20 lg:px-40 py-32 md:py-75">
           <h1
             data-aos="fade-down"
             className="text-white text-5xl md:text-7xl xl:text-8xl font-extrabold max-w-[70%] drop-shadow-lg"
@@ -78,7 +78,7 @@ export default function Main() {
           <div data-aos="zoom-in" className="mt-10">
             <button
               onClick={() => router.replace('/aboutmore')}
-              className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-bold transition"
+              className="bg-green-500 hover:bg-green-600 text-white text-2xl px-8 py-4 rounded-lg font-bold transition"
             >
               Saiba mais
             </button>

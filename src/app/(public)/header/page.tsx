@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
 import { useState } from "react";
-import { MdClose } from 'react-icons/md';
+import { MdClose, MdHome, MdGroup } from 'react-icons/md';
 import { FaInstagram } from "react-icons/fa";
+
 
 
 //caminho logo img "/img/Logo.png"
@@ -20,13 +21,14 @@ const Header = () => {
   return (
     <div className=" xl:px-20 md:px-20 md:flex bg-green-700 md:bg-transparent md:justify-around  items-center justify-between px-20 flex md:items-center  fixed z-40 w-full">
       <div className="w-20 h-20 mt-2 -ml-13 p-2">
-        <img src={"/img/Logo.png"} alt="photo"/>
+        <Link href={'/'}><img src={"/img/Logo.png"} alt="photo"/></Link>
       </div>
       <div className="md:flex md:flex-col hidden">
         <p className="text-xl font-bold text-white"><strong>Rua Comandante Rubens Silva, 253</strong></p>
         <p className="font-bold text-gray-300">Freguesia, Rio de Janeiro, RJ</p>
       </div>
       <div className="hidden md:flex md:gap-10 md:items-center">
+        <Link className="text-white text-xl hover:bg-green-500 px-2 rounded-2xl duration-700" href={'/'}><MdHome size={30}/></Link>
         <Link className="text-white text-xl hover:bg-green-500 px-2 rounded-2xl duration-700" href={'/about'}>Mestre</Link>
         <Link className="text-white text-xl hover:bg-green-500 px-2 rounded-2xl duration-700" href={"/grounp"}>Turmas</Link>
         <Link className="text-white text-xl hover:bg-blue-500 px-2 rounded-2xl duration-700" href={'/sign-in'}>ADM</Link>
