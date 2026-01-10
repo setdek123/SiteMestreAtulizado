@@ -25,7 +25,7 @@ export async function DELETE(
     }
 
     // ================= PARAM =================
-    const { id } = await context.params; // ⚡ await aqui
+    const { id } = await context.params; //  await aqui
     if (!id || id.length !== 24) {
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
     }

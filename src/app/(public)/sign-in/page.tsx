@@ -48,7 +48,7 @@ export default function SignIn() {
           email: login,
           passw,
         }),
-        credentials: 'include', // 🔥 ESSENCIAL
+        credentials: 'include', // ESSENCIAL
       });
 
       const data = await res.json();
