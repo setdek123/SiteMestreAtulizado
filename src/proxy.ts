@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 
 const publicRoutes = [
   { path: "/", whenAuthenticated: "next" },
+  { path: "/about", whenAuthenticated: "next" },
+  { path: "/aboutmore", whenAuthenticated: "next" },
+  { path: "/grounp", whenAuthenticated: "next" },
   { path: "/sign-in", whenAuthenticated: "redirect" },
   { path: "/register", whenAuthenticated: "redirect" },
   { path: "/home", whenAuthenticated: "next" },
